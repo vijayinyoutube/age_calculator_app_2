@@ -20,8 +20,8 @@ class ButtonWidget extends StatelessWidget {
         minimumSize: const Size(175, 50),
       ),
       onPressed: () {
-         BlocProvider.of<AgeCalculatorCubit>(context)
-            .updateAgeVal(int.parse(ageController.text));
+        BlocProvider.of<AgeCalculatorCubit>(context)
+            .updateAgeVal(ageController.text.toString());
       },
       icon: const Icon(Icons.flutter_dash),
       label: const Text('Calculate'),

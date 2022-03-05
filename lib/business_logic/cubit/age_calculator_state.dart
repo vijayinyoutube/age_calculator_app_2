@@ -1,9 +1,25 @@
 part of 'age_calculator_cubit.dart';
 
-class AgeCalculatorInitial {
-  String stageOfLife;
+@immutable
+abstract class AgeCalculator {
+  const AgeCalculator();
+}
 
-  AgeCalculatorInitial({
+class AgeCalculatorInitial extends AgeCalculator {
+  const AgeCalculatorInitial();
+}
+
+class AgeCalculatorLoading extends AgeCalculator {
+  const AgeCalculatorLoading();
+}
+
+class AgeCalculatorLoaded extends AgeCalculator {
+  final String stageOfLife;
+  const AgeCalculatorLoaded({
     required this.stageOfLife,
   });
+}
+
+class AgeCalculatorError extends AgeCalculator {
+  const AgeCalculatorError();
 }

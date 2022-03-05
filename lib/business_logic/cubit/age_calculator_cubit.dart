@@ -1,12 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 
 part 'age_calculator_state.dart';
 
-class AgeCalculatorCubit extends Cubit<AgeCalculatorInitial> {
-  AgeCalculatorCubit() : super(AgeCalculatorInitial(stageOfLife: ":)"));
+class AgeCalculatorCubit extends Cubit<AgeCalculator> {
+  AgeCalculatorCubit() : super(const AgeCalculatorInitial());
 
-  void updateAgeVal(int ageval) {
-    emit(AgeCalculatorInitial(stageOfLife:getStage(ageval)));
+  Future<void> updateAgeVal(String ageval) async {
+    if (ageval.toString().isEmpty) {
+      emit(const AgeCalculatorError());
+    } else {
+      emit(const AgeCalculatorLoading());
+      await Future.delayed(const Duration(seconds: 3), () {
+        emit(AgeCalculatorLoaded(
+            stageOfLife: getStage(int.parse(ageval.toString()))));
+      });
+    }
   }
 
   String getStage(int ageval) {
